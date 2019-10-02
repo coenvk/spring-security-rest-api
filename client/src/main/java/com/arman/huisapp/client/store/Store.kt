@@ -4,6 +4,7 @@ import com.arman.huisapp.common.Config
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import org.slf4j.LoggerFactory
 import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 import java.nio.file.Files
@@ -31,11 +32,13 @@ object Store {
 
 }
 
+private val Logger = LoggerFactory.getLogger(Store::class.java)
+
 fun main() {
     val response = Store.users.findAll().execute()
     if (response.isSuccessful) {
         response.body()?.forEach {
-            println(it)
+            Logger.info(it.toString())
         }
     }
 }

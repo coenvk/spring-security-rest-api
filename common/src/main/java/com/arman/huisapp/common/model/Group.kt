@@ -40,4 +40,41 @@ data class Group(
 
     override fun toString(): String = "group: { id: $id, name: $name }"
 
+    @DslMarker
+    annotation class GroupBuilder
+
+    @GroupBuilder
+    data class Builder(
+            var id: Long = 0,
+            var name: String = "",
+            var password: String = "",
+            var admin: User? = null,
+            val users: MutableSet<User> = mutableSetOf()
+    ) {
+
+        fun id(id: Long) = apply { this.id = id }
+        fun name(name: String) = apply { this.name = name }
+        fun password(password: String) = apply { this.password = password }
+        fun admin(admin: User) = apply { this.admin = admin }
+
+        fun user(builder: User.Builder): Builder = apply {
+            this.users.add(builder.build())
+        }
+
+        fun build() = Group(id, name, password, admin, users.toSet())
+
+    }
+
+}
+
+inline fun group(buildGroup: Group.Builder.() -> Unit): Group {
+    val builder = Group.Builder()
+    builder.buildGroup()
+    return builder.build()
+}
+
+inline fun Group.Builder.user(buildUser: User.Builder.() -> Unit) {
+    val builder = User.Builder()
+    builder.buildUser()
+    user(builder)
 }
