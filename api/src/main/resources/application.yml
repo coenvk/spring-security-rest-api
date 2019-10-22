@@ -1,13 +1,22 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/huisapp
-    username: arman
-    password: Ddk24*9#qzn@HTyP0X
+    url: jdbc:postgresql://localhost:5433/springsecurityrest
+    username: user
+    password: jLu0XC#GP8sQO+LP
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+  data:
+    rest:
+      base-path: '/api'
 
 server:
   port: 3000
   address: localhost
+
+purge:
+  cron:
+    expression: 0 0 5 * * ?

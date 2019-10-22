@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+
+<h1>Register</h1>
+
+<form action="/" method="POST" th:object="${request}">
+
+    <div>
+        <label>
+            Name
+            <input type="text" th:field="*{name}" required/>
+        </label>
+    </div>
+
+    <div>
+        <label>
+            Email
+            <input type="email" th:field="*{email}" required/>
+        </label>
+    </div>
+
+    <div>
+        <label>
+            Password
+            <input type="password" th:field="*{password}" required/>
+        </label>
+    </div>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>

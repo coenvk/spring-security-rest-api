@@ -5,15 +5,34 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
 
-    <groupId>com.arman.huisapp</groupId>
-    <artifactId>huisapp-library</artifactId>
+    <groupId>com.arman.springsecurityrest</groupId>
+    <artifactId>spring-security-rest</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
         <module>client</module>
         <module>api</module>
         <module>common</module>
+        <module>web</module>
     </modules>
+
+    <profiles>
+        <profile>
+            <id>build-jar-artifact</id>
+            <modules>
+                <module>client</module>
+                <module>api</module>
+                <module>common</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>web-application</id>
+            <modules>
+                <module>web</module>
+            </modules>
+        </profile>
+    </profiles>
 
     <properties>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
@@ -24,7 +43,6 @@
         <retrofit2.version>2.6.1</retrofit2.version>
         <jbrcypt.version>0.4</jbrcypt.version>
         <jjwt.version>0.9.1</jjwt.version>
-        <slugify.version>2.4</slugify.version>
         <jackson.version>2.9.9</jackson.version>
         <retrofit2.converter-jackson.version>2.6.2</retrofit2.converter-jackson.version>
         <slf4j.version>1.7.28</slf4j.version>
@@ -49,6 +67,7 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test</artifactId>
             <version>${kotlin.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
